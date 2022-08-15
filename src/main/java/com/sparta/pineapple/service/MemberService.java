@@ -27,6 +27,7 @@ public class MemberService {
 
     @Transactional
     public ResponseDto<?> createMember(MemberRequestDto requestDto) {
+
         if (null != getPresentMember(requestDto.getMemberName())) {
             return ResponseDto.fail("DUPLICATED_NICKNAME",
                     "중복된 닉네임 입니다.");
@@ -41,7 +42,9 @@ public class MemberService {
                 .memberName(requestDto.getMemberName())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .build();
+
         memberRepository.save(member);
+
         return ResponseDto.success(
                 MemberResponseDto.builder()
                         .id(member.getId())
@@ -54,7 +57,9 @@ public class MemberService {
 
     @Transactional
     public ResponseDto<?> login(LoginRequestDto requestDto, HttpServletResponse response) {
+
         Member member = getPresentMember(requestDto.getMemberName());
+
         if (null == member) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "사용자를 찾을 수 없습니다.");

@@ -1,6 +1,5 @@
 package com.sparta.pineapple.controller;
 
-import com.sparta.pineapple.dto.response.ResponseDto;
 import com.sparta.pineapple.dto.request.LoginRequestDto;
 import com.sparta.pineapple.dto.request.MemberRequestDto;
 import com.sparta.pineapple.dto.response.ResponseDto;
@@ -32,11 +31,6 @@ public class MemberController {
   ) {
     return memberService.login(requestDto, response);
   }
-
-//  @RequestMapping(value = "/member/reissue", method = RequestMethod.POST)
-//  public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-//    return memberService.reissue(request, response);
-//  }
 
   @RequestMapping(value = "/member/logout", method = RequestMethod.POST)
   public ResponseDto<?> logout(HttpServletRequest request) {
