@@ -16,26 +16,26 @@ public class BasketController {
 
     @RequestMapping(value = "/basket", method = RequestMethod.POST)
     public ResponseDto<?> createBasket(@RequestBody BasketRequestDto requestDto,
-                                        HttpServletRequest request) {
+                                       HttpServletRequest request) {
         return basketService.createBasket(requestDto, request);
     }
 
     @RequestMapping(value = "/basket", method = RequestMethod.GET)
-    public ResponseDto<?> getBaskets() {
-        return basketService.getBasket();
+    public ResponseDto<?> getBaskets(HttpServletRequest request) {
+        return basketService.getBasket(request);
     }
 
-    @RequestMapping(value = "/basket/{product_id}", method = RequestMethod.PATCH)
-    public ResponseDto<?> updateBasket(@PathVariable Long product_id,
-                                        @RequestBody BasketRequestDto basketRequestDto,
-                                        HttpServletRequest request) {
-        return basketService.updateBasket(product_id, basketRequestDto, request);
+    @RequestMapping(value = "/basket/{basket_id}", method = RequestMethod.PATCH)
+    public ResponseDto<?> updateBasket(@PathVariable Long basket_id,
+                                       @RequestBody BasketRequestDto basketRequestDto,
+                                       HttpServletRequest request) {
+        return basketService.updateBasket(basket_id, basketRequestDto, request);
     }
 
-    @RequestMapping(value = "/basket/{product_id}", method = RequestMethod.DELETE)
-    public ResponseDto<?> deleteBasket(@PathVariable Long product_id,
-                                        HttpServletRequest request) {
-        return basketService.deleteBasket(product_id, request);
+    @RequestMapping(value = "/basket/{basket_id}", method = RequestMethod.DELETE)
+    public ResponseDto<?> deleteBasket(@PathVariable Long basket_id,
+                                       HttpServletRequest request) {
+        return basketService.deleteBasket(basket_id, request);
     }
 
 }

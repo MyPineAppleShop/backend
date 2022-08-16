@@ -67,9 +67,22 @@ public class BasketService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseDto<?> getBasket() {
+    public ResponseDto<?> getBasket(HttpServletRequest request) {
 
-        List<Basket> basketList = basketRepository.findAll();
+        if (null == request.getHeader("Refresh-Token")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
+        }
+
+        if (null == request.getHeader("Authorization")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
+        }
+
+        Member member = validateMember(request);
+        if (null == member) {
+            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+        }
+
+        List<Basket> basketList = basketRepository.findByMember(member);
         List<BasketResponseDto> basketResponseDtoList = new ArrayList<>();
 
         for (Basket basket : basketList) {
