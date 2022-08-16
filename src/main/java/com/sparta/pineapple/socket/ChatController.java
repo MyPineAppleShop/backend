@@ -1,8 +1,10 @@
 package com.sparta.pineapple.socket;
 
+import com.sparta.pineapple.dto.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -12,8 +14,8 @@ public class ChatController {
     private final ChatService chatService;
 
     @PostMapping
-    public ChatRoom createRoom(@RequestBody String name) {
-        return chatService.createRoom(name);
+    public ResponseDto<?> createRoom(@RequestBody String name ,HttpServletRequest request) {
+        return chatService.createRoom(name, request);
     }
 
     @GetMapping
