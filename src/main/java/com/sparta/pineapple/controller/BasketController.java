@@ -15,10 +15,10 @@ public class BasketController {
 
     private final BasketService basketService;
 
-    @RequestMapping(value = "/basket", method = RequestMethod.POST)
-    public ResponseDto<?> createBasket(@RequestBody BasketRequestDto requestDto,
+    @RequestMapping(value = "/basket/{id}", method = RequestMethod.POST)
+    public ResponseDto<?> createBasket(@PathVariable Long id,
                                        HttpServletRequest request) {
-        return basketService.createBasket(requestDto, request);
+        return basketService.createBasket(id, request);
     }
 
     @RequestMapping(value = "/basket", method = RequestMethod.GET)
