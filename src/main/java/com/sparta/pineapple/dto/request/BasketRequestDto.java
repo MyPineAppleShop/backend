@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BasketRequestDto {
-    private String productClassification;
     private String productName;
     private int cost;
     private String image;

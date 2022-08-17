@@ -2,6 +2,7 @@ package com.sparta.pineapple.service;
 
 import com.sparta.pineapple.dto.request.BasketRequestDto;
 import com.sparta.pineapple.dto.response.BasketResponseDto;
+import com.sparta.pineapple.dto.response.GetBasketResponseDto;
 import com.sparta.pineapple.dto.response.ResponseDto;
 import com.sparta.pineapple.jwt.TokenProvider;
 import com.sparta.pineapple.model.Basket;
@@ -41,7 +42,6 @@ public class BasketService {
         }
 
         Basket basket = Basket.builder()
-                .productClassification(requestDto.getProductClassification())
                 .productName(requestDto.getProductName())
                 .cost(requestDto.getCost())
                 .image(requestDto.getImage())
@@ -54,11 +54,11 @@ public class BasketService {
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
-                        .productClassification(basket.getProductClassification())
                         .productName(basket.getProductName())
                         .cost(basket.getCost())
                         .image(basket.getImage())
                         .count(basket.getCount())
+                        .totalCost((long) basket.getCost() * basket.getCount())
                         .createdAt(basket.getCreatedAt())
                         .modifiedAt(basket.getModifiedAt())
                         .build()
@@ -67,40 +67,44 @@ public class BasketService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseDto<?> getBasket(HttpServletRequest request) {
+    public GetBasketResponseDto<?> getBasket(HttpServletRequest request) {
 
         if (null == request.getHeader("Refresh-Token")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
+            return GetBasketResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
         }
 
         if (null == request.getHeader("Authorization")) {
-            return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
+            return GetBasketResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
         }
 
         Member member = validateMember(request);
         if (null == member) {
-            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+            return GetBasketResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
 
         List<Basket> basketList = basketRepository.findByMember(member);
         List<BasketResponseDto> basketResponseDtoList = new ArrayList<>();
 
+        long basketTotalCost = 0;
+
         for (Basket basket : basketList) {
             basketResponseDtoList.add(
                     BasketResponseDto.builder()
                             .id(basket.getId())
-                            .productClassification(basket.getProductClassification())
                             .productName(basket.getProductName())
                             .cost(basket.getCost())
                             .image(basket.getImage())
                             .count(basket.getCount())
+                            .totalCost((long) basket.getCost() * basket.getCount())
                             .createdAt(basket.getCreatedAt())
                             .modifiedAt(basket.getModifiedAt())
                             .build()
             );
+
+            basketTotalCost += (long) basket.getCost() * basket.getCount();
         }
 
-        return ResponseDto.success(basketResponseDtoList);
+        return GetBasketResponseDto.success(basketResponseDtoList, basketTotalCost);
 
     }
 
@@ -125,14 +129,15 @@ public class BasketService {
         }
 
         basket.update(requestDto);
+
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
-                        .productClassification(basket.getProductClassification())
                         .productName(basket.getProductName())
                         .cost(basket.getCost())
                         .image(basket.getImage())
                         .count(basket.getCount())
+                        .totalCost((long) basket.getCost() * basket.getCount())
                         .createdAt(basket.getCreatedAt())
                         .modifiedAt(basket.getModifiedAt())
                         .build()
@@ -163,11 +168,11 @@ public class BasketService {
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
-                        .productClassification(basket.getProductClassification())
                         .productName(basket.getProductName())
                         .cost(basket.getCost())
                         .image(basket.getImage())
                         .count(basket.getCount())
+                        .totalCost((long) basket.getCost() * basket.getCount())
                         .createdAt(basket.getCreatedAt())
                         .modifiedAt(basket.getModifiedAt())
                         .build()
