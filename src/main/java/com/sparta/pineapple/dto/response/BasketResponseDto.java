@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BasketResponseDto {
   private long id;
+  private String distinction;
   private String productName;
   private int cost;
   private String image;

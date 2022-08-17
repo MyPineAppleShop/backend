@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequestDto {
+    private String distinction;
     private String productName;
     private int cost;
     private String image;

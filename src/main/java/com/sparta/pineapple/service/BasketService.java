@@ -42,6 +42,7 @@ public class BasketService {
         }
 
         Basket basket = Basket.builder()
+                .distinction(requestDto.getDistinction())
                 .productName(requestDto.getProductName())
                 .cost(requestDto.getCost())
                 .image(requestDto.getImage())
@@ -54,6 +55,7 @@ public class BasketService {
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
+                        .distinction(basket.getDistinction())
                         .productName(basket.getProductName())
                         .cost(basket.getCost())
                         .image(basket.getImage())
@@ -91,6 +93,7 @@ public class BasketService {
             basketResponseDtoList.add(
                     BasketResponseDto.builder()
                             .id(basket.getId())
+                            .distinction(basket.getDistinction())
                             .productName(basket.getProductName())
                             .cost(basket.getCost())
                             .image(basket.getImage())
@@ -133,6 +136,7 @@ public class BasketService {
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
+                        .distinction(basket.getDistinction())
                         .productName(basket.getProductName())
                         .cost(basket.getCost())
                         .image(basket.getImage())
@@ -168,6 +172,7 @@ public class BasketService {
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
+                        .distinction(basket.getDistinction())
                         .productName(basket.getProductName())
                         .cost(basket.getCost())
                         .image(basket.getImage())

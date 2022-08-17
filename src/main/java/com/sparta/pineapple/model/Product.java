@@ -20,6 +20,9 @@ public class Product extends Timestamped {
     private Long id;
 
     @Column(nullable = false)
+    private String distinction;
+
+    @Column(nullable = false)
     private String productName;
 
     @Column(nullable = false)

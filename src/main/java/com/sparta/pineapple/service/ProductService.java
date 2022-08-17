@@ -41,6 +41,7 @@ public class ProductService {
         }
 
         Product product = Product.builder()
+                .distinction(requestDto.getDistinction())
                 .productName(requestDto.getProductName())
                 .cost(requestDto.getCost())
                 .image(requestDto.getImage())
@@ -52,6 +53,7 @@ public class ProductService {
         return ResponseDto.success(
                 ProductResponseDto.builder()
                         .id(product.getId())
+                        .distinction(product.getDistinction())
                         .productName(product.getProductName())
                         .cost(product.getCost())
                         .image(product.getImage())
@@ -73,6 +75,7 @@ public class ProductService {
             productResponseDtoList.add(
                     ProductResponseDto.builder()
                             .id(product.getId())
+                            .distinction(product.getDistinction())
                             .productName(product.getProductName())
                             .cost(product.getCost())
                             .image(product.getImage())
@@ -111,6 +114,7 @@ public class ProductService {
         return ResponseDto.success(
                 ProductResponseDto.builder()
                         .id(product.getId())
+                        .distinction(product.getDistinction())
                         .productName(product.getProductName())
                         .cost(product.getCost())
                         .image(product.getImage())
@@ -145,6 +149,7 @@ public class ProductService {
         return ResponseDto.success(
                 ProductResponseDto.builder()
                         .id(product.getId())
+                        .distinction(product.getDistinction())
                         .productName(product.getProductName())
                         .cost(product.getCost())
                         .image(product.getImage())
