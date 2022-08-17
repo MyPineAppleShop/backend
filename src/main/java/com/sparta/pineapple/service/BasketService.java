@@ -90,6 +90,10 @@ public class BasketService {
         long basketTotalCost = 0;
 
         for (Basket basket : basketList) {
+            basketTotalCost += (long) basket.getCost() * basket.getCount();
+        }
+        
+        for (Basket basket : basketList) {
             basketResponseDtoList.add(
                     BasketResponseDto.builder()
                             .id(basket.getId())
@@ -99,12 +103,11 @@ public class BasketService {
                             .image(basket.getImage())
                             .count(basket.getCount())
                             .totalCost((long) basket.getCost() * basket.getCount())
+                            .basketTotalCost(basketTotalCost)
                             .createdAt(basket.getCreatedAt())
                             .modifiedAt(basket.getModifiedAt())
                             .build()
             );
-
-            basketTotalCost += (long) basket.getCost() * basket.getCount();
         }
 
         return GetBasketResponseDto.success(basketResponseDtoList, basketTotalCost);
@@ -133,6 +136,14 @@ public class BasketService {
 
         basket.update(requestDto);
 
+        long basketTotalCost = 0;
+
+        List<Basket> basketList = basketRepository.findByMember(member);
+        for (Basket basket2 : basketList) {
+            basketTotalCost += (long) basket2.getCost() * basket2.getCount();
+        }
+
+
         return ResponseDto.success(
                 BasketResponseDto.builder()
                         .id(basket.getId())
@@ -142,6 +153,7 @@ public class BasketService {
                         .image(basket.getImage())
                         .count(basket.getCount())
                         .totalCost((long) basket.getCost() * basket.getCount())
+                        .basketTotalCost(basketTotalCost)
                         .createdAt(basket.getCreatedAt())
                         .modifiedAt(basket.getModifiedAt())
                         .build()
