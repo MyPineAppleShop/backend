@@ -1,6 +1,7 @@
 package com.sparta.pineapple.controller;
 
 import com.sparta.pineapple.dto.request.BasketRequestDto;
+import com.sparta.pineapple.dto.response.GetBasketResponseDto;
 import com.sparta.pineapple.dto.response.ResponseDto;
 import com.sparta.pineapple.service.BasketService;
 import lombok.RequiredArgsConstructor;
@@ -21,21 +22,21 @@ public class BasketController {
     }
 
     @RequestMapping(value = "/basket", method = RequestMethod.GET)
-    public ResponseDto<?> getBaskets(HttpServletRequest request) {
+    public GetBasketResponseDto<?> getBasket(HttpServletRequest request) {
         return basketService.getBasket(request);
     }
 
-    @RequestMapping(value = "/basket/{basket_id}", method = RequestMethod.PATCH)
-    public ResponseDto<?> updateBasket(@PathVariable Long basket_id,
+    @RequestMapping(value = "/basket/{id}", method = RequestMethod.PATCH)
+    public ResponseDto<?> updateBasket(@PathVariable Long id,
                                        @RequestBody BasketRequestDto basketRequestDto,
                                        HttpServletRequest request) {
-        return basketService.updateBasket(basket_id, basketRequestDto, request);
+        return basketService.updateBasket(id, basketRequestDto, request);
     }
 
-    @RequestMapping(value = "/basket/{basket_id}", method = RequestMethod.DELETE)
-    public ResponseDto<?> deleteBasket(@PathVariable Long basket_id,
+    @RequestMapping(value = "/basket/{id}", method = RequestMethod.DELETE)
+    public ResponseDto<?> deleteBasket(@PathVariable Long id,
                                        HttpServletRequest request) {
-        return basketService.deleteBasket(basket_id, request);
+        return basketService.deleteBasket(id, request);
     }
 
 }

@@ -20,9 +20,6 @@ public class Basket extends Timestamped {
     private Long id;
 
     @Column(nullable = false)
-    private String productClassification;
-
-    @Column(nullable = false)
     private String productName;
 
     @Column(nullable = false)

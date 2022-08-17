@@ -41,7 +41,6 @@ public class ProductService {
         }
 
         Product product = Product.builder()
-                .productClassification(requestDto.getProductClassification())
                 .productName(requestDto.getProductName())
                 .cost(requestDto.getCost())
                 .image(requestDto.getImage())
@@ -53,7 +52,6 @@ public class ProductService {
         return ResponseDto.success(
                 ProductResponseDto.builder()
                         .id(product.getId())
-                        .productClassification(product.getProductClassification())
                         .productName(product.getProductName())
                         .cost(product.getCost())
                         .image(product.getImage())
@@ -75,7 +73,6 @@ public class ProductService {
             productResponseDtoList.add(
                     ProductResponseDto.builder()
                             .id(product.getId())
-                            .productClassification(product.getProductClassification())
                             .productName(product.getProductName())
                             .cost(product.getCost())
                             .image(product.getImage())
@@ -114,7 +111,6 @@ public class ProductService {
         return ResponseDto.success(
                 ProductResponseDto.builder()
                         .id(product.getId())
-                        .productClassification(product.getProductClassification())
                         .productName(product.getProductName())
                         .cost(product.getCost())
                         .image(product.getImage())
@@ -149,7 +145,6 @@ public class ProductService {
         return ResponseDto.success(
                 ProductResponseDto.builder()
                         .id(product.getId())
-                        .productClassification(product.getProductClassification())
                         .productName(product.getProductName())
                         .cost(product.getCost())
                         .image(product.getImage())
