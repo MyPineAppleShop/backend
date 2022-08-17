@@ -1,6 +1,7 @@
 package com.sparta.pineapple.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sparta.pineapple.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BasketResponseDto {
   private long id;
+  private long productId;
   private String distinction;
   private String productName;
   private int cost;

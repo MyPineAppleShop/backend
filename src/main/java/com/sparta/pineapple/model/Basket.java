@@ -19,32 +19,20 @@ public class Basket extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String distinction;
-
-    @Column(nullable = false)
-    private String productName;
-
-    @Column(nullable = false)
-    private int cost;
-
-    @Column(nullable = false)
-    private String image;
-
-    @Column(nullable = false)
-    private int count;
-
     @JoinColumn(name = "member_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
+    @JoinColumn(name = "product_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    private Product product;
+
+    @Column(nullable = false)
+    private int count;
+
 
     public void update(BasketRequestDto basketRequestDto) {
         this.count = basketRequestDto.getCount();
-    }
-
-    public boolean validateMember(Member member) {
-        return !this.member.equals(member);
     }
 
 }
