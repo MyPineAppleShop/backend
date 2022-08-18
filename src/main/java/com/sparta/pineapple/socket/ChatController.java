@@ -1,31 +1,28 @@
 package com.sparta.pineapple.socket;
 
-import com.sparta.pineapple.dto.response.ResponseDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
-@RequiredArgsConstructor
-@RestController
-@RequestMapping("/chat")
+@Controller
 public class ChatController {
-    private final ChatService chatService;
 
-    @PostMapping
-    public ResponseDto<?> createRoom(HttpServletRequest request) {
-        return chatService.createRoom(request);
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+
+    @MessageMapping("/message")
+    @SendTo("/chatroom/public")
+    public Message receiveMessage(@Payload Message message){
+        return message;
     }
 
-    @GetMapping
-    public List<ChatRoom> findAllRoom() {
-        return chatService.findAllRoom();
+    @MessageMapping("/private-message")
+    public Message recMessage(@Payload Message message){
+        simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
+        System.out.println(message.toString());
+        return message;
     }
-
 }

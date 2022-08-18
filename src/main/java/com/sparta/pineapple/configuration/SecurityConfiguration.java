@@ -59,6 +59,7 @@ public class SecurityConfiguration {
         .antMatchers("/member/login").permitAll()
         .antMatchers("/product/**").permitAll()
         .antMatchers("/chat/**").permitAll()
+        .antMatchers("/ws/**").permitAll()
         .anyRequest().authenticated()
 
         .and()

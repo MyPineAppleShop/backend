@@ -1,6 +1,8 @@
-package com.sparta.pineapple.socket2;
+package com.sparta.pineapple.socket;
 
 import lombok.*;
+
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor

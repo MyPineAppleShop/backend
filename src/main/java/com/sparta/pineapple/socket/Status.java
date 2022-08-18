@@ -1,4 +1,4 @@
-package com.sparta.pineapple.socket2;
+package com.sparta.pineapple.socket;
 
 public enum Status {
     JOIN,

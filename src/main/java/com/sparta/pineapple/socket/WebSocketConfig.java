@@ -1,4 +1,4 @@
-package com.sparta.pineapple.socket2;
+package com.sparta.pineapple.socket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -20,5 +20,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.enableSimpleBroker("/chatroom","/user");
         registry.setUserDestinationPrefix("/user");
     }
-
 }
