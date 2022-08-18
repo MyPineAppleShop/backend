@@ -10,7 +10,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("http://applyy.s3-website.ap-northeast-2.amazonaws.com")
                 .allowedMethods("*")
                 .exposedHeaders("Authorization", "Refresh-Token");
     }
