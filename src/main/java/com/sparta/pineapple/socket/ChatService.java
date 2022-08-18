@@ -40,7 +40,7 @@ public class ChatService {
         return chatRooms.get(roomId);
     }
 
-    public ResponseDto<?> createRoom(String name, HttpServletRequest request) {
+    public ResponseDto<?> createRoom(HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND", "로그인이 필요합니다.");
         }
@@ -56,12 +56,15 @@ public class ChatService {
 
         String randomId = UUID.randomUUID().toString();
 
-        return ResponseDto.success(
-        ChatRoom.builder()
+        String name = UUID.randomUUID().toString();
+
+        ChatRoom chatRoom = ChatRoom.builder()
                 .roomId(randomId)
                 .name(name)
-                .build()
-        );
+                .build();
+
+        return ResponseDto.success(chatRoom);
+
     }
 
     public <T> void sendMessage(WebSocketSession session, T message) {
