@@ -14,8 +14,8 @@ public class ChatController {
     private final ChatService chatService;
 
     @PostMapping
-    public ResponseDto<?> createRoom(@RequestBody String name ,HttpServletRequest request) {
-        return chatService.createRoom(name, request);
+    public ResponseDto<?> createRoom(HttpServletRequest request) {
+        return chatService.createRoom(request);
     }
 
     @GetMapping
